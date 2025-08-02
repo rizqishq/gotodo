@@ -1,0 +1,21 @@
+# Binaries
+todo
+gotodo
+*.exe
+*.out
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+
+# Go specific
+vendor/
+*.test
+
+# OS/Tooling files
+.DS_Store
+Thumbs.db
+
+# Task data
+tasks.json
