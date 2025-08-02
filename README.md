@@ -1,149 +1,118 @@
-# 🧠 Task Tracker CLI
+# 🧠 Gotodo CLI
 
-A simple command-line interface (CLI) application written in Go to track your daily tasks.  
-You can add, update, delete, and mark tasks as in-progress or done — all saved locally in a JSON file.
+A simple command-line interface (CLI) built with Go and [Cobra](https://github.com/spf13/cobra) to manage daily tasks efficiently from your terminal.  
+Tasks are saved locally using a JSON file, and you can add, update, delete, and mark them as in-progress or done.
 
----
 
-## 🚀 Features
-
-- ✅ Add new tasks  
-- 📋 List all tasks or filter by status  
-- ✏️ Update existing task descriptions  
-- 🗑️ Delete tasks  
-- 🚧 Mark tasks as in-progress  
-- ✅ Mark tasks as done  
-- 📁 Persistent storage using a JSON file (`tasks.json`)
-
----
-
-## 🛠 Requirements
-
-- Go 1.18 or later  
-- No external libraries required
-
----
 
 ## 📦 Installation
 
-Clone the repository:
+To install, simply use `go install`:
 
-   ```bash
-   git clone https://github.com/rizqishq/ToDo-CLI
-   cd ToDo-CLI
-   ```
----
+```bash
+go install github.com/rizqishq/gotodo
+```
 
-## 📚 Usage
+This will install the CLI tool named `gotodo` into your `$GOBIN`, and you'll be able to run it globally from any terminal.
 
-> The CLI uses **positional arguments**, so no flags are needed.
+
+## 🧪 Example Usage
+
+The CLI uses structured subcommands (thanks to Cobra). Here's how you use it:
 
 ### ➕ Add a task
 
-You can add a task using **add** command:
 ```bash
-go run . add "Write blog post"
--- or
-go run *.go add "Write blog post"
+gotodo add "Learn Go"
 ```
 
 ### 📋 List tasks
 
 ```bash
-go run . list                    # List all tasks
-go run . list todo               # List only todo tasks
-go run . list in-progress        # List in-progress tasks
-go run . list done               # List completed tasks
+gotodo list                  # All tasks
+gotodo list todo             # Only tasks with 'todo' status
+gotodo list in-progress      # Tasks in progress
+gotodo list done             # Completed tasks
 ```
 
 ### ✏️ Update task description
 
 ```bash
-go run . update <id> "New description"
+gotodo update <id> "New Description"
 ```
 
 ### 🗑️ Delete a task
 
 ```bash
-go run . delete <id>
+gotodo delete <id>
 ```
 
 ### 🚧 Mark task as in-progress
 
 ```bash
-go run . mark-in-progress <id>
+gotodo mark-in-progress <id>
 ```
 
 ### ✅ Mark task as done
 
 ```bash
-go run . mark-done <id>
+gotodo mark-done <id>
 ```
+
+
+## 📁 Task Storage
+
+All tasks are saved to a local JSON file at:
+
+```
+./tasks.json
+```
+
+If this file doesn't exist, it will be created automatically on the first task addition.
 
 ---
 
 ## 📝 Task Format
 
-Each task is stored in `tasks.json` in the following format:
+Each task is stored with the following structure:
 
 ```json
 {
   "id": 1,
-  "description": "Write blog post",
+  "description": "Belajar Go",
   "status": "todo",
-  "createdAt": "2025-07-13T10:20:00Z",
-  "updatedAt": "2025-07-13T10:20:00Z"
+  "createdAt": "2025-08-02T20:00:00Z",
+  "updatedAt": "2025-08-02T20:00:00Z"
 }
 ```
 
 ---
 
-## 📁 File Storage
-
-All tasks are stored in:
-```text
-./tasks.json
-```
-
-If the file does not exist, it will be created automatically when the first task is added.
-
----
-
 ## 🧼 Output Example
-- Add task:
+
+### ✅ Add task
 
 ```bash
-$ go run . add "Finish Go CLI"
+gotodo add "Belajar Go"
 
 ✅ Task added successfully!
 🆔 ID         : 1
-📄 Description: Finish Go CLI
+📄 Description: Belajar Go
 📌 Status     : todo 📝
-🕒 Created At : 2025-07-13 18:00
+🕒 Created At : 2025-08-02 20:00
 ```
-- List task:
+
+### 📋 List tasks
+
 ```bash
-$ go run . list
+gotodo list
 
 📋 Listing Tasks (total: 1)
 
 [🆔 1]
-📄 Description: Finish Go CLI
+📄 Description: Belajar Go
 📌 Status     : todo 📝
-🕒 Created At : 2025-07-13 18:00
-🕒 Updated At : 2025-07-13 18:00
+🕒 Created At : 2025-08-02 20:00
+🕒 Updated At : 2025-08-02 20:00
 ------------------------------------
 ```
-
----
-
-## 🧪 Testing
-
-Try each of the following:
-- `add` a few tasks
-- `list` to view them
-- `update` to change descriptions
-- `delete` to remove
-- `mark-in-progress` and `mark-done` to change status
-
----
